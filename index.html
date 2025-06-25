@@ -34,6 +34,34 @@
             </a>
         </ul>
       </aside>
+      <article class="content">
+        <h3>Tambah Tugas</h3>
+        <form action="" method="post">
+          <div class="form-group">
+            <label for="taskName">Nama Tugas</label>
+            <input type="text" id="taskName" name="taskName" required />
+          </div>
+          <div class="form-group">
+            <label for="taskDescription">Deskripsi Tugas</label>
+            <textarea id="taskDescription" name="taskDescription" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dueDate">Tanggal Jatuh Tempo</label>
+            <input type="date" id="dueDate" name="dueDate" required />
+          </div>
+          <div class="form-group">
+            <label for="priority">Prioritas</label>
+            <select id="priority" name="priority" required>
+              <option value="low">Rendah</option>
+              <option value="medium">Sedang</option>
+              <option value="high">Tinggi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn-submit">Tambah Tugas</button>
+          </div>
+        </form>
+      </article>
     </main>
   </body>
 </html>
