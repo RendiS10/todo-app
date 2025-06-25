@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Tugas</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inder&family=Karla:ital,wght@0,200..800;1,200..800&family=Quicksand:wght@300..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h5>Todo-App Rendi Sutendi</h5>
+    </header>
+    <main>
+      <aside class="sidebar">
+        <h3>Menu</h3>
+        <ul>
+          <li>
+            <a href="index.html">
+              <i class="fa-solid fa-plus"></i> Tambah Tugas</a
+            >
+          </li>
+          <li>
+            <a href="#"> <i class="fa-solid fa-tasks"></i> Manajemen Tugas</a>
+          </li>
+        </ul>
+      </aside>
+      <article class="content">
+        <h3>Daftar Tugas</h3>
+        <div id="taskList" class="task-list">
+          <!-- Daftar tugas akan muncul di sini -->
+        </div>
+      </article>
+    </main>
+    <script>
+      // Ambil data tugas dari localStorage
+      const taskList = JSON.parse(localStorage.getItem("tasks")) || [];
+      const taskListDiv = document.getElementById("taskList");
+      if (taskList.length === 0) {
+        taskListDiv.innerHTML =
+          '<p style="text-align:center;color:#888;">Belum ada tugas yang ditambahkan.</p>';
+      } else {
+        taskList.forEach((task, idx) => {
+          const taskCard = document.createElement("div");
+          taskCard.className = "task-card";
+          taskCard.innerHTML = `
+            <div class="task-header">
+              <span class="task-title">${task.taskName}</span>
+              <span class="task-priority priority-${task.priority}">${
+            task.priority.charAt(0).toUpperCase() + task.priority.slice(1)
+          }</span>
+            </div>
+            <div class="task-desc">${task.taskDescription}</div>
+            <div class="task-footer">
+              <span class="task-date"><i class='fa-solid fa-calendar-days'></i> ${
+                task.dueDate
+              }</span>
+            </div>
+          `;
+          taskListDiv.appendChild(taskCard);
+        });
+      }
+    </script>
+  </body>
+</html>

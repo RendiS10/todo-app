@@ -121,3 +121,60 @@ aside ul li {
   color: #fff;
   transform: scale(1.04);
 }
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 18px;
+}
+.task-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #b2dfdb33;
+  padding: 18px 22px;
+  border-left: 5px solid #4caf50;
+  transition: box-shadow 0.2s;
+}
+.task-card:hover {
+  box-shadow: 0 4px 16px #b2dfdb55;
+}
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.task-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #222;
+}
+.task-priority {
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+}
+.priority-low {
+  background: #8bc34a;
+}
+.priority-medium {
+  background: #ffb300;
+}
+.priority-high {
+  background: #e53935;
+}
+.task-desc {
+  color: #444;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+.task-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #009688;
+  font-size: 0.95rem;
+}
