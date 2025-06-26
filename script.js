@@ -17,18 +17,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 2000);
   }
 
-  // Hapus task
-  function addDeleteButton(card) {
+  // Membuat tabel jika belum ada
+  function ensureTaskTable() {
+    if (!document.getElementById("taskTable")) {
+      const table = document.createElement("table");
+      table.id = "taskTable";
+      table.className = "task-table";
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama Tugas</th>
+            <th>Deskripsi</th>
+            <th>Jatuh Tempo</th>
+            <th>Prioritas</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      `;
+      taskList.appendChild(table);
+    }
+  }
+
+  // Hapus task (baris tabel)
+  function addDeleteButton(row) {
     const delBtn = document.createElement("button");
     delBtn.className = "btn-delete";
     delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
     delBtn.title = "Hapus Tugas";
     delBtn.onclick = function () {
-      card.classList.add("fade-out");
-      setTimeout(() => card.remove(), 400);
+      row.classList.add("fade-out");
+      setTimeout(() => row.remove(), 400);
       showNotification("Tugas dihapus", "danger");
     };
-    card.querySelector(".task-header").appendChild(delBtn);
+    return delBtn;
   }
 
   taskForm.addEventListener("submit", function (e) {
@@ -52,22 +75,40 @@ document.addEventListener("DOMContentLoaded", function () {
         ? "Sedang"
         : "Tinggi";
 
-    // Create task card
-    const card = document.createElement("div");
-    card.className = "task-card highlight";
-    card.innerHTML = `
-      <div class="task-header">
-        <span class="task-title">${name}</span>
-        <span class="task-priority ${priorityClass}">${priorityLabel}</span>
-      </div>
-      <div class="task-desc">${desc}</div>
-      <div class="task-footer">
-        <i class="fa-regular fa-calendar"></i> ${due}
-      </div>
+    ensureTaskTable();
+    const table = document.getElementById("taskTable");
+    const tbody = table.querySelector("tbody");
+    const row = document.createElement("tr");
+    row.className = "highlight";
+    // Hitung nomor urut
+    const no = tbody.children.length + 1;
+    row.innerHTML = `
+      <td class="task-no">${no}</td>
+      <td class="task-title">${name}</td>
+      <td class="task-desc">${desc}</td>
+      <td class="task-footer"><i class="fa-regular fa-calendar"></i> ${due}</td>
+      <td><span class="task-priority ${priorityClass}">${priorityLabel}</span></td>
+      <td></td>
     `;
-    addDeleteButton(card);
-    taskList.appendChild(card);
-    setTimeout(() => card.classList.remove("highlight"), 800);
+    // Tambahkan tombol hapus ke kolom aksi
+    row.children[5].appendChild(addDeleteButton(row));
+    tbody.appendChild(row);
+    // Update nomor urut jika ada penghapusan
+    function updateRowNumbers() {
+      Array.from(tbody.children).forEach((tr, idx) => {
+        tr.querySelector(".task-no").textContent = idx + 1;
+      });
+    }
+    // Tambahkan update nomor urut pada hapus
+    row.querySelector(".btn-delete").onclick = function () {
+      row.classList.add("fade-out");
+      setTimeout(() => {
+        row.remove();
+        updateRowNumbers();
+      }, 400);
+      showNotification("Tugas dihapus", "danger");
+    };
+    setTimeout(() => row.classList.remove("highlight"), 800);
     showNotification("Tugas berhasil ditambahkan!");
     taskForm.reset();
     document.getElementById("taskName").focus();
