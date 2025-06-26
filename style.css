@@ -178,3 +178,69 @@ aside ul li {
   color: #009688;
   font-size: 0.95rem;
 }
+/* Sidebar Interaktif */
+.sidebar {
+  position: relative;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+  box-shadow: 2px 0 12px #b2dfdb22;
+  z-index: 10;
+}
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: #009688;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  left: 12px;
+  transition: color 0.2s;
+}
+.sidebar-toggle:hover {
+  color: #4caf50;
+}
+.sidebar ul {
+  width: 100%;
+}
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  font-size: 1rem;
+}
+.sidebar-link:hover,
+.sidebar-link:focus {
+  background: linear-gradient(90deg, #b2dfdb33 60%, #e0f2f1 100%);
+  color: #009688;
+  transform: translateX(6px) scale(1.04);
+  text-decoration: none;
+}
+.sidebar.collapsed {
+  width: 60px !important;
+  min-width: 60px;
+  overflow-x: hidden;
+}
+.sidebar.collapsed h3,
+.sidebar.collapsed ul li a span {
+  display: none;
+}
+.sidebar.collapsed ul li a {
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    width: 60px !important;
+    min-width: 60px;
+  }
+  .sidebar h3,
+  .sidebar ul li a span {
+    display: none;
+  }
+  .sidebar ul li a {
+    justify-content: center;
+  }
+}
