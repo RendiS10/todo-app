@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <h3>Menu</h3>
+      <ul>
+        <li>
+          <a href="index.html" class="sidebar-link"
+            ><i class="fa-solid fa-plus"></i> Todo App</a
+          >
+        </li>
+        <li>
+          <a href="#" class="sidebar-link"
+            ><i class="fa-solid fa-credit-card"></i> Checkout</a
+          >
+        </li>
+      </ul>
+    </aside>
+    <main>
+      <header>
+        <h2>Checkout Page</h2>
+      </header>
+
+      <section class="checkout-form-section">
+        <h3>Form Tagihan</h3>
+        <form id="checkout-form">
+          <div class="form-group">
+            <label for="nama-tagihan">Nama Tagihan</label>
+            <input type="text" id="nama-tagihan" name="nama-tagihan" required />
+          </div>
+          <div class="form-group">
+            <label for="total-tagihan">Total Tagihan</label>
+            <input
+              type="number"
+              id="total-tagihan"
+              name="total-tagihan"
+              required
+              min="0"
+            />
+          </div>
+          <div class="form-group">
+            <label for="tanggal-tagihan">Tanggal Tagihan</label>
+            <input
+              type="date"
+              id="tanggal-tagihan"
+              name="tanggal-tagihan"
+              required
+            />
+          </div>
+          <button type="submit">Simpan</button>
+        </form>
+      </section>
+
+      <section class="tagihan-table-section">
+        <h3>Daftar Tagihan</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Tagihan</th>
+              <th>Total</th>
+              <th>Opsi</th>
+            </tr>
+          </thead>
+          <tbody id="tagihan-table-body">
+            <!-- Data tagihan -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="checkout.js"></script>
+  </body>
+</html>
